@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { FaqComponent } from './faq/faq.component';
 import { CoividIndiaComponent } from './coivid-india/coivid-india.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { StatsComponent } from './stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     NavbarComponent,
     HomeComponent,
     FaqComponent,
-    CoividIndiaComponent
+    CoividIndiaComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,
