@@ -1,0 +1,312 @@
+.Blink {
+    animation: blinker 1.5s cubic-bezier(.5, 0, 1, 1) infinite alternate;  
+  }
+  @keyframes blinker {  
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  .effect-confirmed
+    {
+        display: flex;
+        flex-direction: column; 
+        justify-content: space-between; 
+        align-self: center; 
+        color: red; 
+        border-radius: 40px; 
+        border :2px solid red; 
+        max-width: 30rem;
+    } 
+.effect-confirmed:hover
+    {
+        background-color:lightsalmon;
+        opacity: 1;
+        color: #FFFFFF;
+    }
+.effect-active
+    {
+        display: flex;
+        flex-direction: column; 
+        justify-content: space-between; 
+        align-self: center; 
+        color: blue; 
+        border-radius: 40px; 
+        border :2px solid blue; 
+        max-width: 30rem;
+    } 
+.effect-active:hover
+    {
+        background-color:lightblue;
+        opacity: 1;
+        color: #FFFFFF;
+    }
+.effect-recovered
+    {
+        display: flex;
+        flex-direction: column; 
+        justify-content: space-between; 
+        align-self: center; 
+        color: lightgreen; 
+        border-radius: 40px; 
+        border :3px solid green; 
+        max-width: 30rem;
+    } 
+.effect-recovered:hover
+    {
+        background-color:lightgreen;
+        opacity: 1;
+        color: #FFFFFF;
+    }
+.effect-deaths
+    {
+        display: flex;
+        flex-direction: column; 
+        justify-content: space-between; 
+        align-self: center; 
+        color: gray; 
+        border-radius: 40px; 
+        border :3px solid grey; 
+        max-width: 30rem;
+    } 
+.effect-deaths:hover
+    {
+        background-color:lightgrey;
+        opacity: 1;
+        color: #FFFFFF;
+    }
+.timestamp{
+    font-size: medium; 
+    color: green;
+}
+.last-updated{
+    font-size: small;
+    color: greenyellow;
+}
+.title-right{
+    display: flex; 
+    flex-direction: column; 
+    text-align: right;
+}
+.title-head{
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    font-size: small; 
+    font-family: 'Sen';
+}
+.title-global{
+    display: flex; 
+    flex-direction: column;  
+    justify-content: space-around;
+}
+.title-cases{
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    background: url('../../assets/source (1).gif'); 
+    background-position:center; font-family: 'Sen';
+}
+.label1{
+    font-size: 20px; 
+    align-self: center;
+}
+.label2{
+    font-size: 18px; 
+    align-self: center;
+}
+.label3{
+    font-size: 27px; 
+    align-self: center;
+}
+tbody tr:hover{
+    cursor: pointer;
+    background-color: gray;
+}
+.table-head{
+    overflow-x:auto; 
+    font-family: Open sans; 
+    font-weight: 200;
+}
+section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+}
+.section-place-details {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.section-place-details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 10px;
+    width: 100%;
+}
+.section-place-details-name {
+    display: flex;
+    flex-direction: column;
+    font-size: xx-large;
+    font-weight: 500;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.section-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    position: relative;
+}
+.section-el{
+    display: flex;
+    width: 17%;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    background: white;
+    border: 1px solid ;
+    border-radius: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: default;
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 15px;    
+}
+.section-el:hover{
+    background:lightgray;
+}
+.section-el-link{
+    cursor: pointer;
+}
+.section-el-inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.section-el-number{
+    font-size: 30px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+}
+.section-el-name{
+    color: var(--grey);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    white-space: nowrap;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 991px){
+    .section-container {
+        width: 98%;
+        height: 70%;
+    }
+}
+
+@media (max-width: 991px){
+    .section-el {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+@media (max-width: 991px){
+.section-container > * {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+}
+@media (max-width: 991px)
+{
+.section-el {
+    width: 45%;
+    margin: 0px;
+}
+}
+@media (min-width: 991px) {
+    .modal-dialog{
+      max-width: 900px; 
+    }
+}
+
+.load-cases{
+    animation: fadeInAnimation ease-in-out 2s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+    transition: all 0.3s;
+    
+}
+.load-cases-countries{
+    animation: fadeInAnimation ease-in-out 1.2s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: both   ; 
+    transition: all 1s;
+}
+.load-contents{
+    animation: fadeInAnimation ease-in-out 0.9s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: both   ; 
+    transition: all 1s;   
+}
+.load-modal{
+    animation: fadeInAnimation-modal ease-in-out 1s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: both   ; 
+    transition: all 1s;   
+}
+.load-modal-cases{
+    animation: fadeInAnimation-modal ease-in-out 1.7s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+    transition: all 0.2s;
+}
+@keyframes fadeInAnimation { 
+    0% { 
+        opacity: 0; 
+        transform: translateY(20px);
+    } 
+   
+    100% { 
+        opacity: 1; 
+        transform: translateY(0);
+    } 
+}
+@keyframes fadeInAnimation-modal { 
+    0% { 
+        opacity: 0;
+        transform: translateY(20px);
+    } 
+   
+    100% { 
+        opacity: 1; 
+        transform: translateY(0);
+    } 
+}
+.form-control{
+    box-shadow: antiquewhite;
+    font-family: FontAwesome;
+    max-width: 20%;
+    float: right;
+}

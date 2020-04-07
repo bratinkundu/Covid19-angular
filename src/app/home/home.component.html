@@ -1,0 +1,153 @@
+
+<div class="mx-5 mt-3 title-global">
+    <div class="title-head load-contents">
+      <div>
+        <h3>Covid-19 Tracker</h3>
+      </div>
+      <div class="title-right load-contents" style="animation-delay: 0.3s;">
+        <h6 class="mb-0 last-updated"><i class="fa fa-circle text-danger Blink"></i>&nbsp;Last Updated</h6>
+        <h4 class="timestamp">{{timestamp}}</h4>
+      </div>
+    </div>
+
+    <!-- Casses display -->
+    <div class=" row mt-2 pt-5 px-4 title-cases load-cases">
+      <div class="col-md-2 shadow p-3 mb-5  effect-confirmed load-contents" style="animation-delay: 0.3s">
+        <h5 class="label1">{{textConfirmed}}</h5>
+        <h4 class="label2"></h4>
+        <h1 class="label3">{{totalCases | number}}</h1>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-2 shadow p-3 mb-5 effect-active load-contents" style="animation-delay: 0.6s;" >
+        <h5 class="label1">Active</h5>
+        <h4 class="label2"></h4>
+        <h1 class="label3">{{totalActive | number}}</h1>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-2 shadow p-3 mb-5 effect-recovered load-contents" style="animation-delay: 0.9s;" >
+        <h5 class="label1">Recovered</h5>
+        <h4 class="label2"></h4>
+        <h1 class="label3">{{totalRecovered | number}}</h1>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-2 shadow p-3 mb-5 effect-deaths load-contents" style="animation-delay: 1.2s;">
+        <h5 class="label1" >Deaths</h5>
+        <h4 class="label2" style="animation-duration: 1s;"></h4>
+        <h1 class="label3">{{totalDeaths | number}}</h1>
+      </div>
+    </div>
+    <!-- Cases End -->
+
+    <!--List of all countries-->
+    <div class="mt-2 table-head load-cases-countries" style="animation-delay: 1s;">
+      <input class="form-control mb-2" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#xF002; Search by country" />
+        <table class="table">
+            <thead>
+            <tr style="background-color: antiquewhite;">
+              <th scope="col">#</th>
+              <th scope="col">Country</th>
+              <th scope="col">Confirmed</th>
+              <th scope="col">Active</th>
+              <th scope="col">Recovered</th>
+              <th scope="col">Deaths</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of countryData |  filter:searchText; index as i" id="{{item.countryInfo.iso3}}" (click)="trclick(item.country)">
+              <th scope="row">{{ i + 1 }}</th>
+              <td ><img src="{{item.countryInfo.flag}}" style="width: 30px; height: 20px;">&nbsp; {{item.country}} </td>
+              <td >{{item.cases | number }}</td>
+              <td>{{item.active | number}}</td>
+              <td>{{item.recovered | number}}</td>
+              <td>{{item.deaths | number}}</td>
+            </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>
+
+
+
+  <!-- Modal -->
+<div class="modal" id="exampleModal"  [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content" *ngIf="specificCountry" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; text-transform: uppercase;">
+        <div class="modal-header" style="background-color: beige;">
+          <div class="section-place-details load-modal-cases">
+            <img src="{{specificCountry.countryInfo.flag}}" style="width:150px; height: 70px; border-radius: 10px;">
+            <div class="section-place-details-container">
+              <span class="section-place-details-name" style="text-align: center;">
+                <span style="font-weight: bolder;">{{specificCountry.country}}</span>
+                <h6 style="color: green;">Updated {{countryTimestamp}}</h6>
+              </span>
+            </div>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" (click)="hide()" >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body load-modal">
+          <div class="section-container" >
+            <div class="section-el load-contents" style="animation-delay: 0.2s;">
+              <div class="section-el-inner">
+                <div class="section-el-number">{{specificCountry.cases}}</div>
+                <div class="section-el-name">Total cases</div>
+              </div>
+            </div>
+            <div class="section-el section-el-link load-contents" style="animation-delay: 0.4s;">
+              <div class="section-el-inner">
+                <div class="section-el-number">{{specificCountry.todayCases}}</div>
+                <div class="section-el-name">Today's Cases</div>
+              </div>
+            </div>
+            <div class="section-el load-contents" style="animation-delay: 0.6s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{specificCountry.deaths}}</div>
+                  <div class="section-el-name">Deaths</div>
+                </div>
+              </div>
+              <div class="section-el section-el-link load-contents" style="animation-delay: 0.8s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{specificCountry.recovered}}</div>
+                  <div class="section-el-name">Recoveries</div>
+                </div>
+              </div>
+              <div class="section-el section-el-link load-contents" style="animation-delay: 1s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{specificCountry.casesPerOneMillion}}</div>
+                  <div class="section-el-name">Cases per million</div>
+                </div>
+              </div>
+              <div class="section-el small load-contents" style="animation-delay: 1.2s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{specificCountry.deathsPerOneMillion}}</div>
+                  <div class="section-el-name" style="word-wrap: break-word;">Deaths per million</div>
+                </div>
+              </div>
+              <div class="section-el load-contents" style="animation-delay: 1.4s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{specificCountry.active}}</div>
+                  <div class="section-el-name">Active cases</div>
+                </div>
+              </div>
+              <div class="section-el section-el-link load-contents" style="animation-delay: 1.6s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{fatalityRate}}%</div>
+                  <div class="section-el-name">Fatality rate</div>
+                </div>
+              </div>
+              <div class="section-el load-contents" style="animation-delay: 1.8s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{recoveryRate}}%</div>
+                  <div class="section-el-name">Recovery rate</div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click) = "hide()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

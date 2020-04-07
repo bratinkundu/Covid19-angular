@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
+html {
+  font-size: 10px;
+}
+
+button {
+  all: unset;
+}
+
+.section-title {
+  color: #4f56c0;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 3rem 0;
+}
+@media (max-width: 767px) {
+  .section-title {
+    /* portrait && landscape */
+    font-size: 2.6rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+  .section-title {
+    /* tablets && small laptops */
+  }
+}
+
+#faq {
+  padding: 0 0 10rem;
+}
+#faq .accordion .card {
+  border: 0.1rem solid #C4C4C4;
+  border-radius: .4rem;
+  overflow: hidden;
+  margin: 0 0 1.5rem;
+}
+#faq .accordion .card .card-header {
+  border: none;
+  padding: 0;
+}
+#faq .accordion .card .card-header button {
+  background: #4f56c0 url("http://icons.iconarchive.com/icons/icons8/ios7/512/User-Interface-Minus-icon.png") no-repeat 98.5% center/30px;
+  color: #FFFFFF;
+  font-size: 20px;
+  width: 100%;
+  padding: 1rem 0;
+}
+#faq .accordion .card .card-header button span {
+  display: block;
+  margin: 0 4rem 0 1.5rem;
+}
+#faq .accordion .card .card-header button:focus {
+  box-shadow: none;
+  outline: none;
+}
+#faq .accordion .card .card-header button.collapsed {
+  background: #FFFFFF url("https://image.flaticon.com/icons/png/128/61/61112.png") no-repeat 98% center/18px 18px;
+  color: #4f56c0;
+}
+#faq .accordion .card .card-body {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: .05rem;
+  line-height: 155%;
+}
+#faq .support-text {
+  font-size: 1.6rem;
+  letter-spacing: .05rem;
+  margin: 0;
+}
+.faq-load{
+  animation: fadeInAnimation-faq ease 1s; 
+  animation-iteration-count: 1; 
+  animation-fill-mode: forwards; 
+  transition: ease-in 2s;
+}
+@keyframes fadeInAnimation-faq { 
+  0% { 
+      opacity: 0.2;
+      visibility: hidden;
+      transform: translateY(40px);
+  } 
+ 
+  100% { 
+      opacity: 1; 
+      visibility: visible;
+      transform: translateY(0);
+  } 
+}
+@keyframes slide-faq { 
+  0% { 
+      opacity: 0.2;
+      visibility: hidden;
+      transform: translateX(120px);
+  } 
+ 
+  100% { 
+      opacity: 1; 
+      visibility: visible;
+      transform: translateX(0);
+  } 
+}
+.faq-title{
+  animation: slide-faq ease 1s; 
+  animation-iteration-count: 1; 
+  animation-fill-mode: forwards; 
+  transition: ease-in 1s;
+}

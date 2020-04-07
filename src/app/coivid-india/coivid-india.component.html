@@ -1,0 +1,156 @@
+
+<div class="mx-5 mt-3 title-global">
+    <div class="title-head load-contents">
+      <div>
+        <h3>COVID-19 in India</h3>
+      </div>
+      <div class="title-right load-contents" style="animation-delay: 0.3s;">
+        <h6 class="mb-0 last-updated"><i class="fa fa-circle text-danger Blink"></i>&nbsp;Last Updated</h6>
+        <h4 class="timestamp">{{timestamp}}</h4>
+      </div>
+    </div>
+
+    <!-- Casses display -->
+    <div *ngIf="indiaData" class=" row mt-2 pt-5 px-4 title-cases load-cases">
+      <div class="col-md-2 shadow p-3 mb-5  effect-confirmed load-contents" style="animation-delay: 0.3s">
+        <h5 class="label1">Confirmed</h5>   
+        <h6 class="label2">[<i class="fa fa-arrow-up" aria-hidden="true"></i>{{indiaData.deltaconfirmed}}]</h6>
+        <h1 class="label3">{{indiaData.confirmed | number}}</h1>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-2 shadow p-3 mb-5 effect-active load-contents" style="animation-delay: 0.6s;" >
+        <h5 class="label1">Active</h5>
+        <h6 class="label2"><br></h6>
+        <h1 class="label3">{{indiaData.active | number}}</h1>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-2 shadow p-3 mb-5 effect-recovered load-contents" style="animation-delay: 0.9s;" >
+        <h5 class="label1">Recovered</h5>
+        <h6 class="label2">[<i class="fa fa-arrow-up" aria-hidden="true"></i>{{indiaData.deltarecovered}}]</h6>
+        <h1 class="label3">{{indiaData.recovered | number}}</h1>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-2 shadow p-3 mb-5 effect-deaths load-contents" style="animation-delay: 1.2s;">
+        <h5 class="label1" >Deaths</h5>
+        <h6 class="label2" >[<i class="fa fa-arrow-up" aria-hidden="true" ></i>{{indiaData.deltadeaths}}]</h6>
+        <h1 class="label3">{{indiaData.deaths | number}}</h1>
+      </div>
+    </div> 
+
+    <!-- Cases End -->
+
+    <!--List of all countries-->
+    <div class="mt-2 table-head load-cases-countries" style="animation-delay: 1s;">
+      <input class="form-control mb-2" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#xF002; Search by state" />
+        <table class="table">
+            <thead>
+            <tr style="background-color: antiquewhite;">
+              <th scope="col">#</th>
+              <th scope="col">State</th>
+              <th scope="col">Confirmed</th>
+              <th scope="col">Active</th>
+              <th scope="col">Recovered</th>
+              <th scope="col">Deaths</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of stateData |  filter:searchText; index as i" (click)="getStateData(i+1,item.state)">
+              <th scope="row" >{{ i + 1 }}</th>
+              <td > {{item.state}} </td>
+              <td >{{item.confirmed | number }}</td>
+              <td>{{item.active | number}}</td>
+              <td>{{item.recovered | number}}</td>
+              <td>{{item.deaths | number}}</td>
+            </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>  
+
+
+
+  <!-- Modal -->
+<div class="modal" id="exampleModal"  [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content" *ngIf="specificStateData" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; text-transform: uppercase;">
+        <div class="modal-header" style="background-color: beige;">
+          <div class="section-place-details load-modal-cases">
+            <div class="section-place-details-container">
+              <span class="section-place-details-name" style="text-align: center;">
+                <span style="font-weight: bolder;">{{specificStateData.state}}</span>
+                <h6 style="color: green;">Updated {{stateTimestamp}}</h6>
+              </span>
+            </div>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" (click)="hide()" >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body load-modal">
+          <div class="section-container" >
+            <div class="section-el load-contents" style="animation-delay: 0.2s;">
+              <div class="section-el-inner">
+                <div class="section-el-number">{{specificStateData.confirmed}}</div>
+                <div class="section-el-name">Total cases</div>
+              </div>
+            </div>
+            <div class="section-el load-contents" style="animation-delay: 0.4s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{specificStateData.active}}</div>
+                  <div class="section-el-name">Active cases</div>
+                </div>
+              </div>
+              <div class="section-el load-contents" style="animation-delay: 0.6s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{specificStateData.deaths}}</div>
+                  <div class="section-el-name">Deaths</div>
+                </div>
+              </div>
+              <div class="section-el section-el-link load-contents" style="animation-delay: 0.8s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{specificStateData.recovered}}</div>
+                  <div class="section-el-name">Recoveries</div>
+                </div>
+              </div>
+              
+              
+              <div class="section-el section-el-link load-contents" style="animation-delay: 1s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{fatalityRate}}%</div>
+                  <div class="section-el-name">Fatality rate</div>
+                </div>
+              </div>
+              <div class="section-el load-contents" style="animation-delay: 1.2s;">
+                <div class="section-el-inner">
+                  <div class="section-el-number">{{recoveryRate}}%</div>
+                  <div class="section-el-name">Recovery rate</div>
+                </div>
+              </div>
+          </div>
+          <!-- Table here -->
+          <div class="mt-2 table-head load-cases-countries" style="animation-delay: 1.4s;">
+              <table class="table">
+                  <thead>
+                  <tr style="background-color: antiquewhite;">
+                    <th scope="col">#</th>
+                    <th scope="col">District</th>
+                    <th scope="col">Confirmed</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of districtData ; index as i">
+                    <th scope="row" >{{ i + 1 }}</th>
+                    <td > {{item.district}} </td>
+                    <td >{{item.confirmed | number }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click) = "hide()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+
