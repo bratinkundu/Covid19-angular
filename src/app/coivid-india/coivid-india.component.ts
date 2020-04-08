@@ -30,9 +30,9 @@ export class CoividIndiaComponent implements OnInit {
     this.httpclient.get('https://api.covid19india.org/data.json').subscribe(
       data => {
         this.indiaData = data['statewise'][0]
+        this.timestamp = this.getTimeDifference(data['statewise'][0]['lastupdatedtime'])
         this.stateData = data['statewise']
         this.stateData.splice(0,1)
-        this.timestamp = this.getTimeDifference(data['statewise'][0]['lastupdatedtime'])
       }
     );
   }
