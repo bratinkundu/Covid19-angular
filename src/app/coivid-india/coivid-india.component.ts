@@ -22,6 +22,8 @@ export class CoividIndiaComponent implements OnInit {
   fatalityRate;
   recoveryRate;
 
+  debug1
+  debug2
   ngOnInit(): void {
     this.getIndiaData();
   }
@@ -75,7 +77,7 @@ export class CoividIndiaComponent implements OnInit {
     var d1 = [d[1],d[0],d[2]].join('/')
     var final = new Date(d1).toLocaleDateString("en-IN",{day:'numeric',month:'short'})
     var time = new Date(date).toLocaleTimeString('en-IN',{ hour: '2-digit', minute: '2-digit' })
-    return final+", "+time+" IST"
+    return final+" "+d+" "+d1+" "+time+" IST"
   }
 
   hide()
