@@ -74,10 +74,10 @@ export class CoividIndiaComponent implements OnInit {
 
   getTimeDifference(date){
     var d = new Date(date).toLocaleDateString().split('/')
-    var d1 = [d[1],d[0],d[2]].join('/')
-    var final = new Date(d1).toLocaleDateString("en-IN",{day:'numeric',month:'short'})
+   // var d1 = [d[1],d[0],d[2]].join('/')
+    var final = new Date(date).toLocaleDateString("en-US",{day:'numeric',month:'short'})
     var time = new Date(date).toLocaleTimeString('en-IN',{ hour: '2-digit', minute: '2-digit' })
-    return final+" "+d+" "+d1+" "+time+" IST"
+    return final+" "+d+" "+time+" IST"
   }
 
   hide()
