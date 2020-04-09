@@ -56,7 +56,6 @@ export class StatsComponent implements OnInit {
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgba(103, 58, 183, .8)',
             fill:true,
-            pointHoverRadius: 5
           }
         ]
       },
