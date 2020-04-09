@@ -62,6 +62,7 @@ export class StatsComponent implements OnInit {
       },
       options: {
         responsive: true,
+        maintainAspectRatio:false,
         title:{
           display:true,
           text:'Cummulative increase of Confirmed cases in India'
