@@ -10,6 +10,7 @@ import { FaqComponent } from './faq/faq.component';
 import { CoividIndiaComponent } from './coivid-india/coivid-india.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { StatsComponent } from './stats/stats.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { StatsComponent } from './stats/stats.component';
     AppRoutingModule,
     HttpClientModule,
     Ng2SearchPipeModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
