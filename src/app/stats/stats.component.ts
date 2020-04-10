@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Chart } from 'chart.js';
 
@@ -7,18 +7,35 @@ import { Chart } from 'chart.js';
   templateUrl: './stats.component.html',
   styleUrls: ['./stats.component.css']
 })
-export class StatsComponent implements OnInit {
+export class StatsComponent implements OnInit,AfterViewInit {
 
-  constructor(private httpclient:HttpClient) { }
-
-  confirmeddata = new Array();
+  constructor(private httpclient:HttpClient) { 
+    this.getCumulativeData()  
+    if(this.clicked)
+    {
+      console.log("clicked")
+    }
+  }
+  
   labeldata = new Array();
+  confirmeddata = new Array();
+  recovereddata = new Array();
+  deathdata = new Array();
+  dailyconfirmeddata = new Array();
+  dailyrecovereddata = new Array();
+  dailydeadthdata = new Array();
   chart;
+  chart1;
+  clicked = true
  
   
   ngOnInit(): void {
-    this.getCumulativeData()
-    this.generateChart()
+
+    console.log('oninit')
+  }
+
+  ngAfterViewInit() :void{
+  
   }
 
 
@@ -37,10 +54,15 @@ export class StatsComponent implements OnInit {
     {
        this.confirmeddata.push(data["cases_time_series"][i]['totalconfirmed'])
        this.labeldata.push(data["cases_time_series"][i]['date'])
+       this.recovereddata.push(data["cases_time_series"][i]['totalrecovered'])
+       this.deathdata.push(data["cases_time_series"][i]['totaldeceased'])
+       this.dailyconfirmeddata.push(data["cases_time_series"][i]['dailyconfirmed'])
+       this.dailyrecovereddata.push(data["cases_time_series"][i]['dailyrecovered'])
+       this.dailydeadthdata.push(data["cases_time_series"][i]['dailydeceased'])
     }
   }
   
-  generateChart(){
+  generateTotalsChart(){
     this.chart = new Chart('canvas',{
       type: 'line',
       data: {
@@ -49,7 +71,29 @@ export class StatsComponent implements OnInit {
           {
             label:"Confimed Cases: ",
             data: this.confirmeddata, // your data array
-            backgroundColor: 'rgba(103, 58, 183, .1)',
+            backgroundColor: '#fff',
+            borderColor: 'rgba(234, 11, 11, 1)',
+            pointBackgroundColor: 'rgba(234, 11, 11, 1)',
+            pointBorderColor: 'rgba(234, 11, 11, 1)',
+            pointHoverBackgroundColor: 'rgba(234, 11, 11, 1)',
+            pointHoverBorderColor: 'rgba(234, 11, 11, 1)',
+            fill:true,
+          },
+          {
+            label:"Recovered Cases: ",
+            data: this.recovereddata, // your data array
+            backgroundColor: '#fff',
+            borderColor: 'rgba(2, 182, 23, 1)',
+            pointBackgroundColor: 'rgba(2, 182, 23, 1)',
+            pointBorderColor: 'rgba(2, 182, 23, 1)',
+            pointHoverBackgroundColor: 'rgba(2, 182, 23, 1)',
+            pointHoverBorderColor: 'rgba(2, 182, 23, 1)',
+            fill:true,
+          },
+          {
+            label:"Deaths: ",
+            data: this.deathdata, // your data array
+            backgroundColor: '#fff',
             borderColor: 'rgb(103, 58, 183)',
             pointBackgroundColor: 'rgb(103, 58, 183)',
             pointBorderColor: '#fff',
@@ -64,11 +108,15 @@ export class StatsComponent implements OnInit {
         maintainAspectRatio:false,
         title:{
           display:true,
-          text:'Cummulative increase of Confirmed cases in India'
+          text:'Total Cases in India',
+          fontSize: 20,
+        },
+        tooltips:{
+          mode:'index',
         },
         hover: {
           mode: 'index',
-          intersect: false
+          intersect: true
         },
         legend: {
           display: false
@@ -87,20 +135,77 @@ export class StatsComponent implements OnInit {
             display: true
           }],
         },
-        onHover : function(etv,item)
-        {
-          //var item = this.getElementAtEvent(etv);
-          if (item.length) {
-            //console.log("onHover",item[0]["_item"], etv.type);
-            //console.log(item[0]['_index'])
-           return this.data.datasets[0].data[item[0]['_index']]
-          //  console.log(item)
-          //  console.log()
-          }
-        }
       }
     });
   
   }
 
+
+  generateDailyChart(){
+    this.chart1 = new Chart('canvas1',{
+      type: 'line',
+      data: {
+        labels: this.labeldata, // your labels array
+        datasets: [
+          {
+            label:"Daily Cases: ",
+            data: this.dailyconfirmeddata, // your data array
+            backgroundColor: 'rgba(103, 58, 183, .1)',
+            borderColor: 'rgb(103, 58, 183)',
+            pointBackgroundColor: 'rgb(103, 58, 183)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(103, 58, 183, .8)',
+            fill:true,
+          },
+          {
+            label:"Confirmed Cases: ",
+            data: this.confirmeddata, // your data array
+            backgroundColor: 'rgba(103, 58, 183, .1)',
+            borderColor: 'red',
+            pointBackgroundColor: 'rgb(103, 58, 183)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(103, 58, 183, .8)',
+            fill:true,
+          },
+
+        ]
+      },
+      
+      options: {
+        responsive: true,
+        maintainAspectRatio:false,
+        title:{
+          display:true,
+          text:'Daily increase of Confirmed cases in India'
+        },
+        tooltips:{
+          mode:'index',
+        },
+        hover: {
+          mode: 'index',
+          intersect: true
+        },
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [{
+            gridLines:{
+              drawOnChartArea:false,
+            },
+            display: true
+          }],
+          yAxes: [{
+            gridLines:{
+              drawOnChartArea:false,
+            },
+            display: true
+          }],
+        },
+      }
+    });
+  
+  }
 }

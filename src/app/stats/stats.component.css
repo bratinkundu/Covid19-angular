@@ -1,18 +1,18 @@
 canvas{
-    width: 80% !important;
+    width: 90% !important;
 }
-.chart-container{
-   
-    height: 30%;
-}
- @media (orientation:portrait) {
+ /* .chart-container{
+    height: 50%;
+}  */
+
+ /* @media (orientation:portrait) {
     .chart-container {
-      min-height: 20%;
+      height: 20%;  
     }
    } 
    
    @media (orientation:landscape) {
     .chart-container {
-      min-height: 90vh;
+      height: 90vh;
     }
-   }
+}   */
