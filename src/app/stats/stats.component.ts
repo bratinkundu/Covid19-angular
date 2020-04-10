@@ -50,7 +50,7 @@ export class StatsComponent implements OnInit,AfterViewInit {
   }
   formatData(data)
   {
-    for(let i=0 ;i < Object.keys(data["cases_time_series"]).length;i++)
+    for(let i=31 ;i < Object.keys(data["cases_time_series"]).length;i++)
     {
        this.confirmeddata.push(data["cases_time_series"][i]['totalconfirmed'])
        this.labeldata.push(data["cases_time_series"][i]['date'])
@@ -78,6 +78,7 @@ export class StatsComponent implements OnInit,AfterViewInit {
             pointHoverBackgroundColor: 'rgba(234, 11, 11, 1)',
             pointHoverBorderColor: 'rgba(234, 11, 11, 1)',
             fill:true,
+            pointRadius:0.4,
           },
           {
             label:"Recovered Cases: ",
@@ -89,6 +90,7 @@ export class StatsComponent implements OnInit,AfterViewInit {
             pointHoverBackgroundColor: 'rgba(2, 182, 23, 1)',
             pointHoverBorderColor: 'rgba(2, 182, 23, 1)',
             fill:true,
+            pointRadius:0.4,
           },
           {
             label:"Deaths: ",
@@ -96,10 +98,11 @@ export class StatsComponent implements OnInit,AfterViewInit {
             backgroundColor: '#fff',
             borderColor: 'rgb(103, 58, 183)',
             pointBackgroundColor: 'rgb(103, 58, 183)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(103, 58, 183, .8)',
+            pointBorderColor: 'rgb(103, 58, 183)',
+            pointHoverBackgroundColor: 'rgb(103, 58, 183)',
+            pointHoverBorderColor: 'rgb(103, 58, 183)',
             fill:true,
+            pointRadius:0.4,
           }
         ]
       },
@@ -113,22 +116,34 @@ export class StatsComponent implements OnInit,AfterViewInit {
         },
         tooltips:{
           mode:'index',
+          intersect:false,
+          position:'average',
         },
         hover: {
-          mode: 'index',
-          intersect: true
+          intersect: false,
         },
         legend: {
           display: false
         },
         scales: {
           xAxes: [{
+            type: 'time',
+            time:{
+              unit: 'day',
+              tooltipFormat: 'MMM DD',
+              stepSize: 7,
+            },
             gridLines:{
               drawOnChartArea:false,
             },
             display: true
           }],
           yAxes: [{
+            type:'linear',
+            ticks: {
+              beginAtZero: true,
+              max: undefined,
+            },
             gridLines:{
               drawOnChartArea:false,
             },
