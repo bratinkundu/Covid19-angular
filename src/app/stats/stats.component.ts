@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Chart } from 'chart.js';
 
@@ -7,15 +7,9 @@ import { Chart } from 'chart.js';
   templateUrl: './stats.component.html',
   styleUrls: ['./stats.component.css']
 })
-export class StatsComponent implements OnInit,AfterViewInit {
+export class StatsComponent implements OnInit {
 
-  constructor(private httpclient:HttpClient) { 
-    this.getCumulativeData()  
-    if(this.clicked)
-    {
-      console.log("clicked")
-    }
-  }
+  constructor(private httpclient:HttpClient) { }
   
   labeldata = new Array();
   confirmeddata = new Array();
@@ -26,25 +20,19 @@ export class StatsComponent implements OnInit,AfterViewInit {
   dailydeadthdata = new Array();
   chart;
   chart1;
-  clicked = true
+  renderChart;
+  btnValue : number
  
   
   ngOnInit(): void {
-
-    console.log('oninit')
+    this.getCumulativeData()
   }
-
-  ngAfterViewInit() :void{
-  
-  }
-
 
   getCumulativeData()
   {
     this.httpclient.get('https://api.covid19india.org/data.json').subscribe(
       data => {
-        console.log(data["cases_time_series"][8]['totalconfirmed'])
-        this.formatData(data)
+          this.formatData(data)
       }
     )
   }
@@ -63,6 +51,11 @@ export class StatsComponent implements OnInit,AfterViewInit {
   }
   
   generateTotalsChart(){
+ 
+    if(this.chart != undefined )
+    {
+      this.chart.destroy()
+    }
     this.chart = new Chart('canvas',{
       type: 'line',
       data: {
@@ -111,19 +104,22 @@ export class StatsComponent implements OnInit,AfterViewInit {
         maintainAspectRatio:false,
         title:{
           display:true,
-          text:'Total Cases in India',
-          fontSize: 20,
+          text:'TOTAL CASES IN INDIA',
+          fontSize: 25,
+          fontFamily:'Sens',
         },
         tooltips:{
           mode:'index',
           intersect:false,
           position:'average',
+          caretPadding:5
         },
         hover: {
           intersect: false,
         },
         legend: {
-          display: false
+          position:'bottom',
+          display: true
         },
         scales: {
           xAxes: [{
@@ -152,67 +148,99 @@ export class StatsComponent implements OnInit,AfterViewInit {
         },
       }
     });
-  
+    
   }
 
 
   generateDailyChart(){
-    this.chart1 = new Chart('canvas1',{
+    if(this.chart != undefined )
+    {
+      this.chart.destroy()
+    }
+    this.chart = new Chart('canvas',{
       type: 'line',
       data: {
         labels: this.labeldata, // your labels array
         datasets: [
           {
-            label:"Daily Cases: ",
+            label:"Confimed Cases: ",
             data: this.dailyconfirmeddata, // your data array
-            backgroundColor: 'rgba(103, 58, 183, .1)',
-            borderColor: 'rgb(103, 58, 183)',
-            pointBackgroundColor: 'rgb(103, 58, 183)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(103, 58, 183, .8)',
+            backgroundColor: '#fff',
+            borderColor: 'rgba(234, 11, 11, 1)',
+            pointBackgroundColor: 'rgba(234, 11, 11, 1)',
+            pointBorderColor: 'rgba(234, 11, 11, 1)',
+            pointHoverBackgroundColor: 'rgba(234, 11, 11, 1)',
+            pointHoverBorderColor: 'rgba(234, 11, 11, 1)',
             fill:true,
+            pointRadius:0.4,
           },
           {
-            label:"Confirmed Cases: ",
-            data: this.confirmeddata, // your data array
-            backgroundColor: 'rgba(103, 58, 183, .1)',
-            borderColor: 'red',
-            pointBackgroundColor: 'rgb(103, 58, 183)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(103, 58, 183, .8)',
+            label:"Recovered Cases: ",
+            data: this.dailyrecovereddata, // your data array
+            backgroundColor: '#fff',
+            borderColor: 'rgba(2, 182, 23, 1)',
+            pointBackgroundColor: 'rgba(2, 182, 23, 1)',
+            pointBorderColor: 'rgba(2, 182, 23, 1)',
+            pointHoverBackgroundColor: 'rgba(2, 182, 23, 1)',
+            pointHoverBorderColor: 'rgba(2, 182, 23, 1)',
             fill:true,
+            pointRadius:0.4,
           },
-
+          {
+            label:"Deaths: ",
+            data: this.dailydeadthdata, // your data array
+            backgroundColor: '#fff',
+            borderColor: 'rgb(103, 58, 183)',
+            pointBackgroundColor: 'rgb(103, 58, 183)',
+            pointBorderColor: 'rgb(103, 58, 183)',
+            pointHoverBackgroundColor: 'rgb(103, 58, 183)',
+            pointHoverBorderColor: 'rgb(103, 58, 183)',
+            fill:true,
+            pointRadius:0.4,
+          }
         ]
       },
-      
       options: {
         responsive: true,
         maintainAspectRatio:false,
         title:{
           display:true,
-          text:'Daily increase of Confirmed cases in India'
+          text:'DAILY CASES IN INDIA',
+          fontSize: 25,
+          fontFamily:'Sens',
         },
         tooltips:{
           mode:'index',
+          intersect:false,
+          position:'average',
+          caretPadding:5
         },
         hover: {
-          mode: 'index',
-          intersect: true
+          intersect: false,
         },
         legend: {
-          display: false
+          position:'bottom',
+          display: true
         },
         scales: {
           xAxes: [{
+            type: 'time',
+            time:{
+              unit: 'day',
+              tooltipFormat: 'MMM DD',
+              stepSize: 7,
+            },
             gridLines:{
               drawOnChartArea:false,
             },
             display: true
           }],
           yAxes: [{
+            type:'linear',
+            ticks: {
+              beginAtZero: true,
+              max: undefined,
+            },
             gridLines:{
               drawOnChartArea:false,
             },
@@ -221,6 +249,6 @@ export class StatsComponent implements OnInit,AfterViewInit {
         },
       }
     });
-  
+    
   }
 }
