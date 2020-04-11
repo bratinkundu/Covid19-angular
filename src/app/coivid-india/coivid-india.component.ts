@@ -22,8 +22,6 @@ export class CoividIndiaComponent implements OnInit {
   fatalityRate;
   recoveryRate;
 
-  debug1
-  debug2
   ngOnInit(): void {
     this.getIndiaData();
   }

@@ -123,8 +123,8 @@ tbody tr:hover{
 .form-control{
     box-shadow: antiquewhite;
     font-family: FontAwesome;
-    max-width: 20%;
-    float: right;
+    max-width: max-content;
+    align-self: flex-end;
 }
 section {
     display: flex;

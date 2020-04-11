@@ -8,11 +8,13 @@
     <h2 style="text-align: center;">Daily increase of Confirmed cases in India</h2>
     <canvas id="canvas1" class="mr-2 ml-2">{{chart1}}</canvas>
 </div> -->
+<div class="mt-5 load-contents" style="display: flex; flex-direction: row; justify-content: center; ">
+    <button class="btn btn-outline-primary mx-5" (click)="generateTotalsChart()">Cummilative Data</button>
+    <button class="btn btn-outline-primary mx-5" (click)="generateDailyChart()">Daily Data</button>
+</div>
 
-<button class="btn btn-outline-primary" (click)="generateTotalsChart()">Cummilative Data</button>
-<button class="btn btn-outline-primary" (click)="generateDailyChart()">Daily Data</button>
-
-<div class="mt-3 chart-container">
+<div class="mt-3 chart-container load-contents">
     <canvas id="canvas" class="mr-2 ml-2" >{{chart}}</canvas>
-</div> 
+</div>
+
 

@@ -1,0 +1,19 @@
+@keyframes slide { 
+    0% { 
+        opacity: 0.2;
+        visibility: hidden;
+        transform: translateX(120px);
+    } 
+   
+    100% { 
+        opacity: 1; 
+        visibility: visible;
+        transform: translateX(0);
+    } 
+  }
+  .load-contents{
+    animation: slide ease 0.8s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+    transition: all ease-in-out 0.3s;
+  }

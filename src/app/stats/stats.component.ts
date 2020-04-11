@@ -19,9 +19,6 @@ export class StatsComponent implements OnInit {
   dailyrecovereddata = new Array();
   dailydeadthdata = new Array();
   chart;
-  chart1;
-  renderChart;
-  btnValue : number
  
   
   ngOnInit(): void {
@@ -51,7 +48,7 @@ export class StatsComponent implements OnInit {
   }
   
   generateTotalsChart(){
- 
+    
     if(this.chart != undefined )
     {
       this.chart.destroy()
@@ -153,6 +150,7 @@ export class StatsComponent implements OnInit {
 
 
   generateDailyChart(){
+ 
     if(this.chart != undefined )
     {
       this.chart.destroy()
@@ -251,4 +249,8 @@ export class StatsComponent implements OnInit {
     });
     
   }
+  generatePatientData(){
+    
+  }
+
 }

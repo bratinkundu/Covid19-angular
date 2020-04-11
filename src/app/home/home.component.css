@@ -307,6 +307,6 @@ section {
 .form-control{
     box-shadow: antiquewhite;
     font-family: FontAwesome;
-    max-width: 20%;
-    float: right;
+    max-width: max-content;
+    align-self: flex-start;
 }
