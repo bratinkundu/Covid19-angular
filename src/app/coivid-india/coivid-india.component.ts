@@ -14,8 +14,8 @@ export class CoividIndiaComponent implements OnInit {
   showModal : boolean;
   indiaData;
   stateData = [];
-  timestamp : string;
-  stateTimestamp : string;
+  timestamp 
+  stateTimestamp 
   searchText;
   specificStateData;
   districtData;
@@ -71,11 +71,13 @@ export class CoividIndiaComponent implements OnInit {
   
 
   getTimeDifference(date){
+    console.log(date)
     var d = date.split('/')
+    var t = date.split(" ")
     var d1 = [d[1],d[0],d[2]].join('/')
-    var final = new Date(d1).toDateString()
-    var time = new Date(date).toLocaleTimeString('en-IN',{ hour: '2-digit', minute: '2-digit' })
-    return final+","+time+" IST"
+    var final = new Date(d1)
+    var time = new Date(t[1])
+    return final 
   }
 
   hide()

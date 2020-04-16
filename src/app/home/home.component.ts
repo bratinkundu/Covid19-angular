@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   totalRecovered : number;
   totalActive : number;
   totalDeaths : number;
-  timestamp : string;
+  @Input() timestamp : string;
   specificCountry;
   countryTimestamp:string;
   fatalityRate;
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   searchText;
 
   ngOnInit(): void {
-    this.getIntitalData();
+    this.getIntitalData();  
     this.getCountiesData();
   }
 

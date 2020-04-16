@@ -6,7 +6,7 @@
       </div>
       <div class="title-right load-contents" style="animation-delay: 0.3s;">
         <h6 class="mb-0 last-updated"><i class="fa fa-circle text-danger Blink"></i>&nbsp;Last Updated</h6>
-        <h4 class="timestamp">{{timestamp}}</h4>
+        <h4 class="timestamp">{{timestamp | date:'MMM d, y, HH:mm'}}&nbsp;IST</h4>
       </div>
     </div>
 
@@ -78,7 +78,7 @@
             <div class="section-place-details-container">
               <span class="section-place-details-name" style="text-align: center;">
                 <span style="font-weight: bolder;">{{specificStateData.state}}</span>
-                <h6 style="color: green;">Updated {{stateTimestamp}}</h6>
+                <h6 style="color: green;">Updated {{stateTimestamp | date:'MMM d, y, HH:mm'}}&nbsp;IST</h6>
               </span>
             </div>
           </div>
