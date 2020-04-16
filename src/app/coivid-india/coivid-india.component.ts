@@ -37,16 +37,22 @@ export class CoividIndiaComponent implements OnInit {
     );
   }
 
-  getStateData(id:number, state:string)
+  getStateData(statecode:string, state:string)
   {
     this.httpclient.get('https://api.covid19india.org/data.json').subscribe(
       data => {
-          this.specificStateData = data['statewise'][id]
-          this.stateTimestamp = this.getTimeDifference(data['statewise'][id]['lastupdatedtime'])
-          this.fatalityRate = ((data['statewise'][id]['deaths']/data['statewise'][id]['confirmed'])*100)
-          this.fatalityRate = this.fatalityRate.toFixed(2)
-          this.recoveryRate = ((data['statewise'][id]['recovered']/data['statewise'][id]['confirmed'])*100)
-          this.recoveryRate = this.recoveryRate.toFixed(2)
+        for(var i=0;i<Object.keys(data['statewise']).length;i++)
+        {
+          if(data['statewise'][i]['statecode'] == statecode)
+          {
+            this.specificStateData = data['statewise'][i]
+            this.stateTimestamp = this.getTimeDifference(data['statewise'][i]['lastupdatedtime'])
+            this.fatalityRate = ((data['statewise'][i]['deaths']/data['statewise'][i]['confirmed'])*100)
+            this.fatalityRate = this.fatalityRate.toFixed(2)
+            this.recoveryRate = ((data['statewise'][i]['recovered']/data['statewise'][i]['confirmed'])*100)
+            this.recoveryRate = this.recoveryRate.toFixed(2)
+          }
+        }
       }
     );
     this.httpclient.get('https://api.covid19india.org/v2/state_district_wise.json').subscribe(
@@ -71,12 +77,9 @@ export class CoividIndiaComponent implements OnInit {
   
 
   getTimeDifference(date){
-    console.log(date)
     var d = date.split('/')
-    var t = date.split(" ")
     var d1 = [d[1],d[0],d[2]].join('/')
     var final = new Date(d1)
-    var time = new Date(t[1])
     return final 
   }
 

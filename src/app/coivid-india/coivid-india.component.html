@@ -54,7 +54,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of stateData |  filter:searchText; index as i" (click)="getStateData(i+1,item.state)">
+            <tr *ngFor="let item of stateData |  filter:searchText; index as i" (click)="getStateData(item.statecode,item.state)">
               <th scope="row" >{{ i + 1 }}</th>
               <td > {{item.state}} </td>
               <td >{{item.confirmed | number }}</td>
