@@ -6,34 +6,34 @@
       </div>
       <div class="title-right load-contents" style="animation-delay: 0.3s;">
         <h6 class="mb-0 last-updated"><i class="fa fa-circle text-danger Blink"></i>&nbsp;Last Updated</h6>
-        <h4 class="timestamp" [(ngModel)]="timestamp" >{{timestamp}}</h4>
+        <h4 class="timestamp" >{{timestamp}}</h4>
       </div>
     </div>
 
     <!-- Casses display -->
-    <div class=" row mt-2 pt-5 px-4 title-cases load-cases">
+    <div *ngIf = "worldData" class=" row mt-2 pt-5 px-4 title-cases load-cases">
       <div class="col-md-2 shadow p-3 mb-5  effect-confirmed load-contents" style="animation-delay: 0.3s">
-        <h5 class="label1">{{textConfirmed}}</h5>
-        <h4 class="label2"></h4>
-        <h1 class="label3">{{totalCases | number}}</h1>
+        <h5 class="label1">Confirmed</h5>
+        <h6 class="label2">[<i class="fa fa-arrow-up" aria-hidden="true"></i>{{worldData.todayCases | number}}]</h6>
+        <h1 class="label3">{{worldData.cases | number}}</h1>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-2 shadow p-3 mb-5 effect-active load-contents" style="animation-delay: 0.6s;" >
         <h5 class="label1">Active</h5>
-        <h4 class="label2"></h4>
-        <h1 class="label3">{{totalActive | number}}</h1>
+        <h4 class="label2"><br></h4>
+        <h1 class="label3">{{worldData.active | number}}</h1>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-2 shadow p-3 mb-5 effect-recovered load-contents" style="animation-delay: 0.9s;" >
         <h5 class="label1">Recovered</h5>
-        <h4 class="label2"></h4>
-        <h1 class="label3">{{totalRecovered | number}}</h1>
+        <h4 class="label2"><br></h4>
+        <h1 class="label3">{{worldData.recovered | number}}</h1>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-2 shadow p-3 mb-5 effect-deaths load-contents" style="animation-delay: 1.2s;">
         <h5 class="label1" >Deaths</h5>
-        <h4 class="label2" style="animation-duration: 1s;"></h4>
-        <h1 class="label3">{{totalDeaths | number}}</h1>
+        <h6 class="label2">[<i class="fa fa-arrow-up" aria-hidden="true"></i>{{worldData.todayDeaths | number}}]</h6>
+        <h1 class="label3">{{worldData.deaths | number}}</h1>
       </div>
     </div>
     <!-- Cases End -->

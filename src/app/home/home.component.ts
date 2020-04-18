@@ -13,10 +13,7 @@ export class HomeComponent implements OnInit {
   showModal : boolean;
   textConfirmed :string = "Confirmed"
   countryData : any;
-  totalCases : number;
-  totalRecovered : number;
-  totalActive : number;
-  totalDeaths : number;
+  worldData;
   @Input() timestamp : string;
   specificCountry;
   countryTimestamp:string;
@@ -48,19 +45,16 @@ export class HomeComponent implements OnInit {
   }
 
   public getIntitalData(){
-    this.httpclient.get('https://corona.lmao.ninja/all').subscribe(
+    this.httpclient.get('https://corona.lmao.ninja/v2/all').subscribe(
       data =>{
-          this.totalCases = data['cases'];
-          this.totalRecovered = data['recovered'];
-          this.totalDeaths = data['deaths'];
-          this.totalActive = data['active'];
+          this.worldData = data
           this.timestamp = this.getTime(data['updated']);
       }
     );
   }
 
   public getCountiesData(){
-    this.httpclient.get('https://corona.lmao.ninja/countries').subscribe(
+    this.httpclient.get('https://corona.lmao.ninja/v2/countries').subscribe(
       (data : any[]) =>{
             this.countryData = data;
       }
@@ -78,7 +72,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCountryData(country){
-    this.httpclient.get('https://corona.lmao.ninja/countries/'+country).subscribe(
+    this.httpclient.get('https://corona.lmao.ninja/v2/countries/'+country).subscribe(
       (data:any[]) =>{
         this.specificCountry = data;
         this.countryTimestamp = this.getTime(data['updated'])
